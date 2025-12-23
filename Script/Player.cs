@@ -1,40 +1,34 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody2D
+namespace FirstGodotGame.Script
 {
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
-
-	public override void _PhysicsProcess(double delta)
+	public partial class Player : CharacterBody2D
 	{
-		Vector2 velocity = Velocity;
 
-		// Add the gravity.
-		if (!IsOnFloor())
-		{
-			velocity += GetGravity() * (float)delta;
-		}
+        /// <summary>
+        /// 移动速度，单位为 像素/秒
+        /// </summary>
+		private const float Speed = 150;
+        /// <summary>
+        /// 加速度
+        /// </summary>
+        private const float Accelerate = 15f;
+        /// <summary>
+        /// 存储当前输入方向
+        /// </summary>
+        private Vector2 _inputDirection = Vector2.Zero;
 
-		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+		public override void _PhysicsProcess(double delta)
 		{
-			velocity.Y = JumpVelocity;
+            // 获取输入动作的向量值
+            _inputDirection = Input.GetVector("Left", "Right", "Up", "Down");
+            // 平滑过渡到目标速度
+            // Velocity.Lerp：线性插值方法  第一个参数：_inputDirection * Speed - 目标速度向量 第二个参数：(float)(Accelerate * delta) - 插值因子
+			Velocity = Velocity.Lerp(_inputDirection * Speed, (float)(Accelerate * delta));
+            // 执行基于 Velocity 的移动和碰撞检测
+			MoveAndSlide();
 		}
-
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		if (direction != Vector2.Zero)
-		{
-			velocity.X = direction.X * Speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-		}
-
-		Velocity = velocity;
-		MoveAndSlide();
 	}
+
 }
