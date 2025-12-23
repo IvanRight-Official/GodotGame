@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=4 uid="uid://ceg47bpfol78g"]
+
+[ext_resource type="Texture2D" uid="uid://5h7aiwkmrmsr" path="res://Asset/Level/Background_Grass.png" id="1_xb63x"]
+[ext_resource type="PackedScene" uid="uid://dtn4iers0u62x" path="res://Game/Scene/player.tscn" id="2_f5lw1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f5lw1"]
+texture = ExtResource("1_xb63x")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jheye"]
+tile_size = Vector2i(256, 256)
+sources/0 = SubResource("TileSetAtlasSource_f5lw1")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMapLayer_BackGroud" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAABAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_jheye")
+
+[node name="Player" parent="." instance=ExtResource("2_f5lw1")]
+position = Vector2(500, 700)
