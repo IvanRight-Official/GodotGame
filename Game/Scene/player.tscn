@@ -79,3 +79,6 @@ offset = Vector2(0, -20)
 position = Vector2(0, -1)
 texture = ExtResource("2_rj7j4")
 offset = Vector2(0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
