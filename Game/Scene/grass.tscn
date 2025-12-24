@@ -13,8 +13,9 @@ script = ExtResource("1_3284k")
 shape = SubResource("RectangleShape2D_wi1ue")
 
 [node name="Sprite2D_Back" type="Sprite2D" parent="."]
+position = Vector2(0, -20)
 texture = ExtResource("1_qot1m")
-offset = Vector2(0, -10)
+offset = Vector2(0, 4)
 region_enabled = true
 region_rect = Rect2(0, 96, 48, 32)
 
