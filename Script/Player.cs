@@ -29,7 +29,7 @@ public partial class Player : CharacterBody2D
     /// <summary>
     /// 动画方向
     /// </summary>
-    private string _animationDirection;
+    private string _animationDirection = nameof(DirectionEnum.Down);
 
     public override void _Ready()
     {

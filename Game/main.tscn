@@ -440,7 +440,8 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAA
 tile_set = SubResource("TileSet_jheye")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAJABcAAAAAAAQAAAASABcAAAAAAAQAAAAJABIAAAAAAAQAAAASABIAAAAAAAQAAAAUABYAAAABAAQAAAAVABYAAAACAAQAAAAWABYAAAACAAQAAAAXABYAAAACAAQAAAAYABYAAAACAAQAAAAZABYAAAADAAQAAAA=")
 tile_set = SubResource("TileSet_aq0ho")
 
 [node name="Player" parent="." instance=ExtResource("2_f5lw1")]
-position = Vector2(500, 700)
+position = Vector2(660, 721)

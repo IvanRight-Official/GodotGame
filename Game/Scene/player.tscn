@@ -484,6 +484,7 @@ animation = &"Idle_Down"
 offset = Vector2(0, -20)
 
 [node name="Sprite2D_Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.39215687)
 position = Vector2(0, -1)
 texture = ExtResource("2_rj7j4")
 offset = Vector2(0, 1)
