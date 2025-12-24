@@ -91,6 +91,16 @@ csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
 # 能 readonly 的字段建议标记 readonly（线程安全 / 可维护性）
 dotnet_style_readonly_field = true:suggestion
 
+# 建议行宽 100 字符（文档为“考虑换行”，非强制）
+max_line_length = 100
+
+# Allman 风格大括号
+csharp_new_line_before_open_brace = all
+
+# 不在 { 后、} 前插入空行(不支持)
+# csharp_new_line_between_members = true
+# csharp_new_line_after_open_brace = none
+# csharp_new_line_before_close_brace = none
 
 ############################################
 # 命名规范
@@ -125,3 +135,11 @@ dotnet_naming_symbols.constants.required_modifiers = const
 
 # PascalCase 命名风格
 dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+# PascalCase：命名空间、类型、方法、属性、常量、事件
+dotnet_naming_rule.pascal_symbols.severity = warning
+dotnet_naming_rule.pascal_symbols.symbols = pascal_symbols
+dotnet_naming_rule.pascal_symbols.style = pascal_style
+
+dotnet_naming_symbols.pascal_symbols.applicable_kinds = namespace, class, struct, interface, enum, method, property, event
+dotnet_naming_style.pascal_style.capitalization = pascal_case

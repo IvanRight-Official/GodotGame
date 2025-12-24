@@ -5,4 +5,8 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>FirstGodotGame</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Game\main.tscn" />
+    <Content Include="Game\Scene\player.tscn" />
+  </ItemGroup>
 </Project>
