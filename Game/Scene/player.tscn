@@ -273,7 +273,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_357xm")
 }],
 "loop": true,
-"name": &"Idle_Dowm",
+"name": &"Idle_Down",
 "speed": 12.0
 }, {
 "frames": [{
@@ -480,7 +480,7 @@ shape = SubResource("CircleShape2D_b8828")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7gp2l")
-animation = &"Idle_Dowm"
+animation = &"Idle_Down"
 offset = Vector2(0, -20)
 
 [node name="Sprite2D_Shadow" type="Sprite2D" parent="."]
