@@ -24,3 +24,6 @@ texture = ExtResource("1_qot1m")
 offset = Vector2(0, -10)
 region_enabled = true
 region_rect = Rect2(0, 0, 48, 32)
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]

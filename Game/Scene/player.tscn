@@ -473,6 +473,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+collision_layer = 2
 script = ExtResource("1_rj7j4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

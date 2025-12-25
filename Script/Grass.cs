@@ -42,4 +42,22 @@ public partial class Grass : Area2D
     public override void _Process(double delta)
     {
     }
+
+    /// <summary>
+    /// 进入检测事件
+    /// </summary>
+    /// <param name="body">进入的对象</param>
+    public void OnBodyEntered(Node2D body)
+    {
+        GD.Print($"{body.Name} 进入了 grass");
+    }
+
+    /// <summary>
+    /// 离开检测事件
+    /// </summary>
+    /// <param name="body">离开的对象</param>
+    public void OnBodyExited(Node2D body)
+    {
+        GD.Print($"{body.Name} 离开了 grass");
+    }
 }
