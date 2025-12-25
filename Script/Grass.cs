@@ -58,6 +58,7 @@ public partial class Grass : Area2D
         frontTween.TweenProperty(_frontSprite2D, "skew", frontEndSkew, 1.5f).From(frontStartSkew);
         frontTween.TweenProperty(_frontSprite2D, "skew", frontStartSkew, 1.5f).From(frontEndSkew);
         frontTween.SetEase(Tween.EaseType.InOut);
+        frontTween.SetSpeedScale((float)GD.RandRange(0.5, 1.5));
 
         // 创建补间动画器：背景图
         float backStartSkew = frontEndSkew * 0.5f;
