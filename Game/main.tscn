@@ -534,3 +534,5 @@ position = Vector2(500, 700)
 
 [node name="Grass" parent="Level" instance=ExtResource("4_b0md6")]
 position = Vector2(551, 694)
+collision_layer = 512
+collision_mask = 2
