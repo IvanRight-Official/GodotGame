@@ -10,9 +10,21 @@ public partial class Grass : Area2D
     private Sprite2D _frontSprite2D;
 
     /// <summary>
+    /// 暴露前景图片的get方法
+    /// 惰性加载模式
+    /// </summary>
+    public Sprite2D FrontSprite2D => _frontSprite2D ??= GetNode<Sprite2D>("Sprite2D");
+
+    /// <summary>
     /// 背景图片
     /// </summary>
     private Sprite2D _backSprite2D;
+
+    /// <summary>
+    /// 暴露背景图片的get方法
+    /// 惰性加载模式
+    /// </summary>
+    public Sprite2D BackSprite2D => _backSprite2D ??= GetNode<Sprite2D>("Sprite2D_Back");
 
     /// <summary>
     /// 进入草地的动画
@@ -32,13 +44,16 @@ public partial class Grass : Area2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        // 关闭 Process 回调， 提高性能
+        SetProcess(false);
+
         // 绑定godot中Grass场景的背景图片
-        _backSprite2D = GetNode<Sprite2D>("Sprite2D_Back");
-        _frontSprite2D = GetNode<Sprite2D>("Sprite2D");
+        _backSprite2D ??= GetNode<Sprite2D>("Sprite2D_Back");
+        _frontSprite2D ??= GetNode<Sprite2D>("Sprite2D");
 
         // 创建补间动画器：前景图
         Tween frontTween = GetTree().CreateTween().SetLoops();
-        float frontStartSkew = Mathf.DegToRad(GD.RandRange(-10, -10));
+        float frontStartSkew = Mathf.DegToRad(GD.RandRange(-10, 10));
         float frontEndSkew = -frontStartSkew;
         frontTween.TweenProperty(_frontSprite2D, "skew", frontEndSkew, 1.5f).From(frontStartSkew);
         frontTween.TweenProperty(_frontSprite2D, "skew", frontStartSkew, 1.5f).From(frontEndSkew);
@@ -78,6 +93,11 @@ public partial class Grass : Area2D
         CreateNewGrassTween(_frontLeaveScale, 0.5f);
     }
 
+    /// <summary>
+    /// 创建新的草地补间动画
+    /// </summary>
+    /// <param name="targetScale">目标尺寸</param>
+    /// <param name="duration">持续时间</param>
     private void CreateNewGrassTween(Vector2 targetScale, float duration)
     {
         if (_frontTween != null) _frontTween.Kill();

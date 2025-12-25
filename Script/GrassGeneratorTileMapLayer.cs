@@ -21,7 +21,9 @@ public partial class GrassGeneratorTileMapLayer : TileMapLayer
     public override void _Ready()
     {
         // 将 用于绘制草地层的 TileMapLayer 设置为不可见
-        Visible = false;
+        // Visible = false;
+        // 完全禁用该 TileMapLayer（渲染、碰撞、导航、场景图块等）。 Visible 的强化版本
+        Enabled = false;
         // 获取所有已使用的单元格
         Array<Vector2I> usedCells = GetUsedCells();
         // 遍历所有已使用的单元格
@@ -38,6 +40,14 @@ public partial class GrassGeneratorTileMapLayer : TileMapLayer
             // 将草地挂载到上一级的Level节点下
             // 3. 异步挂载到父节点（通常是开启了 Y-Sort 的容器）
             GetParent().CallDeferred(Node.MethodName.AddChild, grass);
+            // 将草的位置进行随机偏移
+            grass.GlobalPosition += new Vector2(GD.RandRange(-OffSet, OffSet),
+                GD.RandRange(-OffSet, OffSet));
+
+            // 随机设置 grass 的图片水平翻转
+            grass.BackSprite2D.FlipH = GD.RandRange(0, 1) == 1;
+            grass.FrontSprite2D.FlipH = GD.RandRange(0, 1) == 1;
+            // grass.GetNode<Sprite2D>("Sprite2D").FlipH = GD.RandRange(0, 1) == 1; 这种办法可行，但是存在一定的问题，一是代码耦合，而是性能不高
         }
 
         // 4. 重要： 任务完成后销毁这个“生成器层”，以释放不必要的内存
