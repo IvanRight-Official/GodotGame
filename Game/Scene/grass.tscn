@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8f00eaejnxor"]
+[gd_scene load_steps=5 format=3 uid="uid://b8f00eaejnxor"]
 
 [ext_resource type="Script" uid="uid://cq2rcesdwj3mg" path="res://Script/Grass.cs" id="1_3284k"]
 [ext_resource type="Texture2D" uid="uid://bbf6hfj00436y" path="res://Asset/Level/TreeAndGrass.png" id="1_qot1m"]
+[ext_resource type="Script" uid="uid://coxqj0b8l80p0" path="res://Script/RandomFrontGrass.cs" id="3_0kb55"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wi1ue"]
 
@@ -24,6 +25,8 @@ texture = ExtResource("1_qot1m")
 offset = Vector2(0, -10)
 region_enabled = true
 region_rect = Rect2(0, 0, 48, 32)
+script = ExtResource("3_0kb55")
+FrontGrassRectArray = Array[Rect2]([Rect2(0, 0, 48, 32), Rect2(0, 32, 48, 32), Rect2(0, 64, 48, 32), Rect2(0, 0, 48, 32), Rect2(0, 0, 48, 32)])
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
 [connection signal="body_exited" from="." to="." method="OnBodyExited"]
