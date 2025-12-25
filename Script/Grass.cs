@@ -14,6 +14,21 @@ public partial class Grass : Area2D
     /// </summary>
     private Sprite2D _backSprite2D;
 
+    /// <summary>
+    /// 进入草地的动画
+    /// </summary>
+    private Tween _frontTween;
+
+    /// <summary>
+    /// 前景图片缩放
+    /// </summary>
+    private Vector2 _frontEnterScale = new(1f, 0.5f);
+
+    /// <summary>
+    /// 前景图片恢复
+    /// </summary>
+    private Vector2 _frontLeaveScale = new(1f, 1f);
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -49,7 +64,8 @@ public partial class Grass : Area2D
     /// <param name="body">进入的对象</param>
     public void OnBodyEntered(Node2D body)
     {
-        GD.Print($"{body.Name} 进入了 grass");
+        // GD.Print($"{body.Name} 进入了 grass");
+        CreateNewGrassTween(_frontEnterScale, 0.1f);
     }
 
     /// <summary>
@@ -58,6 +74,16 @@ public partial class Grass : Area2D
     /// <param name="body">离开的对象</param>
     public void OnBodyExited(Node2D body)
     {
-        GD.Print($"{body.Name} 离开了 grass");
+        // GD.Print($"{body.Name} 离开了 grass");
+        CreateNewGrassTween(_frontLeaveScale, 0.5f);
+    }
+
+    private void CreateNewGrassTween(Vector2 targetScale, float duration)
+    {
+        if (_frontTween != null) _frontTween.Kill();
+
+        _frontTween = GetTree().CreateTween();
+        _frontTween.TweenProperty(_frontSprite2D, "scale", targetScale, duration)
+            .SetEase(Tween.EaseType.Out);
     }
 }
