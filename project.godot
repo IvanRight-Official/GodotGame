@@ -52,6 +52,25 @@ Right={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="World"
+2d_render/layer_2="Player"
+2d_render/layer_3="Enemies"
+2d_render/layer_4="Player_Hurtbox"
+2d_render/layer_5="Enemy_Hurtbox"
+2d_render/layer_6="Player_Projectile"
+2d_render/layer_7="Enemy_Projectile"
+2d_render/layer_8="Collectibles"
+2d_render/layer_9="Interactives"
+2d_render/layer_10="Environment_Dest"
+2d_render/layer_11="Platform_OneWay"
+2d_render/layer_12="Trigger_Zone"
+2d_render/layer_13="Vision_Sensor"
+2d_render/layer_14="Pit_Obstacle"
+2d_render/layer_15="Liquid"
+2d_render/layer_16="Ignore_Physics"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
