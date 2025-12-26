@@ -53,9 +53,4 @@ public partial class GrassGeneratorTileMapLayer : TileMapLayer
         // 4. 重要： 任务完成后销毁这个“生成器层”，以释放不必要的内存
         QueueFree();
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-    }
 }

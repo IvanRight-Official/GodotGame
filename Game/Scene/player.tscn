@@ -1,9 +1,12 @@
-[gd_scene load_steps=67 format=3 uid="uid://dtn4iers0u62x"]
+[gd_scene load_steps=70 format=3 uid="uid://dtn4iers0u62x"]
 
 [ext_resource type="Script" uid="uid://bpd2gxr4f4y0e" path="res://Script/Player.cs" id="1_rj7j4"]
 [ext_resource type="Texture2D" uid="uid://cxtigt3e5dn7h" path="res://Asset/Animations/Player_Idle.png" id="1_s7hed"]
 [ext_resource type="Texture2D" uid="uid://c37tnkrxc03rb" path="res://Asset/Animations/Shadow.png" id="2_rj7j4"]
 [ext_resource type="Texture2D" uid="uid://38rqjhp3mv2r" path="res://Asset/Animations/Player_Run.png" id="3_b8828"]
+[ext_resource type="Script" uid="uid://cnot6bydf4l0c" path="res://Script/StateMachine/StateMachine.cs" id="5_vvvbf"]
+[ext_resource type="Script" uid="uid://b0wm4p8i4acsd" path="res://Script/StateMachine/PlayerState/PlayerIdle.cs" id="6_y4sok"]
+[ext_resource type="Script" uid="uid://c1esr2irrguaa" path="res://Script/StateMachine/PlayerState/PlayerRun.cs" id="7_4ujyx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b8828"]
 radius = 4.0
@@ -492,3 +495,12 @@ offset = Vector2(0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_vvvbf")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_y4sok")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("7_4ujyx")

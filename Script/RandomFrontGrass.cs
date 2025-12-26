@@ -23,9 +23,4 @@ public partial class RandomFrontGrass : Sprite2D
             RegionRect = FrontGrassRectArray[randomIndex];
         }
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-    }
 }

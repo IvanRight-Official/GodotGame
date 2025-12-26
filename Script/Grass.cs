@@ -69,11 +69,6 @@ public partial class Grass : Area2D
         backTween.SetEase(Tween.EaseType.InOut);
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-    }
-
     /// <summary>
     /// 进入检测事件
     /// </summary>
