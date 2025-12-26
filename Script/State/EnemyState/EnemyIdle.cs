@@ -1,0 +1,5 @@
+namespace FirstGodotGame.Script.State.EnemyState;
+
+public partial class EnemyIdle : Core.State
+{
+}

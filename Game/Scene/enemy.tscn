@@ -1,7 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://dj2tea60maj5d"]
+[gd_scene load_steps=41 format=3 uid="uid://dj2tea60maj5d"]
 
+[ext_resource type="Script" uid="uid://b8ggbctu2tb8o" path="res://Script/Actor/Enemy.cs" id="1_qynk5"]
 [ext_resource type="Texture2D" uid="uid://blt6ycapyx33v" path="res://Asset/Animations/Enemy_Idle_Move_Hurt.png" id="1_qyr5w"]
 [ext_resource type="Texture2D" uid="uid://c37tnkrxc03rb" path="res://Asset/Animations/Shadow.png" id="4_bqbao"]
+[ext_resource type="Script" uid="uid://cxnypjncr08bq" path="res://Script/State/EnemyState/EnemyIdle.cs" id="5_8ql2b"]
+[ext_resource type="Script" uid="uid://cnot6bydf4l0c" path="res://Script/Core/StateMachine.cs" id="5_k5ifa"]
+[ext_resource type="Script" uid="uid://vilydg28hwhr" path="res://Script/State/EnemyState/EnemyMove.cs" id="6_w6u1f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b8828"]
 radius = 4.0
@@ -372,14 +376,15 @@ animations = [{
 [node name="Enemy" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
+script = ExtResource("1_qynk5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_b8828")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hjta8")
-animation = &"Idle_Down"
-frame_progress = 0.43875426
+animation = &"Move_Down"
+frame_progress = 0.1858378
 offset = Vector2(0, -40)
 
 [node name="Sprite2D_Shadow" type="Sprite2D" parent="."]
@@ -389,10 +394,13 @@ texture = ExtResource("4_bqbao")
 offset = Vector2(0, 1)
 
 [node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_k5ifa")
 
 [node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_8ql2b")
 
-[node name="Run" type="Node" parent="StateMachine"]
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("6_w6u1f")
 
 [node name="DebugLabel" type="Label" parent="."]
 z_index = 100

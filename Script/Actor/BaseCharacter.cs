@@ -5,6 +5,7 @@ using Godot;
 
 namespace FirstGodotGame.Script.Actor;
 
+[GlobalClass]
 public partial class BaseCharacter : CharacterBody2D
 {
     /// <summary>
