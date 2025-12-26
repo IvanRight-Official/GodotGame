@@ -504,3 +504,11 @@ script = ExtResource("6_y4sok")
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("7_4ujyx")
+
+[node name="DebugLabel" type="Label" parent="."]
+z_index = 100
+offset_left = 11.000001
+offset_right = 51.0
+offset_bottom = 23.0
+scale = Vector2(0.3, 0.3)
+text = "State"

@@ -14,7 +14,7 @@ public abstract partial class State : Node
     private StateMachine _stateMachine;
 
     /// <summary>
-    /// 设置状态机节点，必须要加上[Export]和get，才能在编辑器中看到
+    /// 设置状态机节点，必须要加上[Export]和get，才能调试时在编辑器中看到
     /// </summary>
     [Export]
     public StateMachine StateMachine
@@ -42,6 +42,7 @@ public abstract partial class State : Node
     /// </summary>
     public virtual void Update()
     {
+        if (_stateMachine.DebugLabel != null) _stateMachine.DebugLabel.Text = Name;
     }
 
     /// <summary>
