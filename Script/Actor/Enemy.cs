@@ -14,6 +14,8 @@ public partial class Enemy : BaseCharacter
     /// </summary>
     private Player _player;
 
+    public Player Player => _player;
+
     /// <summary>
     /// 玩家所属角度
     /// </summary>
