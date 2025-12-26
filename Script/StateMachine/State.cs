@@ -13,40 +13,55 @@ public abstract partial class State : Node
     /// </summary>
     private StateMachine _stateMachine;
 
+    /// <summary>
+    /// 设置状态机节点，必须要加上[Export]和get，才能在编辑器中看到
+    /// </summary>
+    [Export]
+    public StateMachine StateMachine
+    {
+        get => _stateMachine;
+        set => _stateMachine = value;
+    }
+
+    /// <summary>
+    /// 状态机所属的实体，使用泛型或具体类
+    /// </summary>
+    /// <returns></returns>
+    protected Node Actor;
 
     /// <summary>
     /// 每一物理帧触发 (PhysicsProcess)
     /// </summary>
     /// <param name="delta">上次更新以来经过的时间</param>
-    protected virtual void UpdatePhysics(double delta)
+    public virtual void UpdatePhysics(double delta)
     {
     }
 
     /// <summary>
     /// 更新
     /// </summary>
-    protected virtual void Update()
+    public virtual void Update()
     {
     }
 
     /// <summary>
     /// 进入状态时触发
     /// </summary>
-    protected virtual void Enter()
+    public virtual void Enter()
     {
     }
 
     /// <summary>
     /// 退出状态时触发
     /// </summary>
-    protected virtual void Exit()
+    public virtual void Exit()
     {
     }
 
     /// <summary>
-    /// 准备
+    /// 初始化
     /// </summary>
-    protected virtual void IsReady()
+    public virtual void Init()
     {
     }
 }
