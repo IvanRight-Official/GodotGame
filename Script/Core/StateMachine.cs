@@ -1,7 +1,11 @@
+using System.Linq;
+
+using FirstGodotGame.Script.Actor;
+
 using Godot;
 using Godot.Collections;
 
-namespace FirstGodotGame.Script.StateMachine;
+namespace FirstGodotGame.Script.Core;
 
 /// <summary>
 /// 状态机
@@ -18,11 +22,17 @@ public partial class StateMachine : Node
     /// </summary>
     private State _currentState;
 
+    public State CurrentState => _currentState;
+
     /// <summary>
     /// 状态列表
+    /// （
+    /// 这里存在命名空间冲突， Godot.Collections和System.Collections.Generic都有Dictionary
+    /// 但是 _states 不会和 godot 的api进行交互 所以使用.net的 Dictionary
+    /// ）
     /// key： 状态名称
     /// </summary>
-    private readonly Dictionary<string, State> _states = new();
+    private readonly System.Collections.Generic.Dictionary<string, State> _states = new();
 
     /// <summary>
     /// 用于调试使用的标签
@@ -32,7 +42,7 @@ public partial class StateMachine : Node
     public override void _Ready()
     {
         DebugLabel = GetParent().GetNode<Label>("DebugLabel");
-        // 获取所有子节点，即状态节点
+        // 获取所有子节点，即状态节点 这里使用 Godot.Collections.Array 是因为与 godot 的api进行交互
         Array<Node> children = GetChildren();
         foreach (Node child in children)
             if (child is State state)
@@ -40,8 +50,11 @@ public partial class StateMachine : Node
                 state.StateMachine = this;
                 _states.Add(state.Name, state);
                 // 状态初始化
-                state.Init();
+                state.Init(GetParent<BaseCharacter>());
             }
+
+        // 默认进入第一个状态
+        if (_states.Count > 0) InitialState ??= _states.Values.First();
 
         // _currentState = GetChild<State>(0);
         // _currentState.Enter();

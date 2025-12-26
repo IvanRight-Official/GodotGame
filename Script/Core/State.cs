@@ -1,6 +1,8 @@
+using FirstGodotGame.Script.Actor;
+
 using Godot;
 
-namespace FirstGodotGame.Script.StateMachine;
+namespace FirstGodotGame.Script.Core;
 
 /// <summary>
 /// 状态抽象类
@@ -27,7 +29,17 @@ public abstract partial class State : Node
     /// 状态机所属的实体，使用泛型或具体类
     /// </summary>
     /// <returns></returns>
-    protected Node Actor;
+    private BaseCharacter _actor;
+
+    /// <summary>
+    /// 状态机所属的实体，必须要加上[Export]和get，才能调试时在编辑器中看到
+    /// </summary>
+    [Export]
+    public BaseCharacter Actor
+    {
+        get => _actor;
+        set => _actor = value;
+    }
 
     /// <summary>
     /// 每一物理帧触发 (PhysicsProcess)
@@ -62,7 +74,8 @@ public abstract partial class State : Node
     /// <summary>
     /// 初始化
     /// </summary>
-    public virtual void Init()
+    public virtual void Init(BaseCharacter actor)
     {
+        _actor = actor;
     }
 }

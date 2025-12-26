@@ -6,16 +6,6 @@ namespace FirstGodotGame.Script.Actor;
 
 public partial class Player : BaseCharacter
 {
-    /// <summary>
-    /// 移动速度，单位为 像素/秒
-    /// </summary>
-    [Export] public int Speed = 150;
-
-    /// <summary>
-    /// 加速度
-    /// </summary>
-    private const float Accelerate = 15f;
-
     public override void _UnhandledInput(InputEvent @event)
     {
         // 获取输入动作的向量值
