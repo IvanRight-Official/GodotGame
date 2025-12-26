@@ -6,7 +6,7 @@ using Godot;
 namespace FirstGodotGame.Script.Actor;
 
 [GlobalClass]
-public partial class BaseCharacter : CharacterBody2D
+public abstract partial class BaseCharacter : CharacterBody2D
 {
     /// <summary>
     /// 存储当前输入方向
@@ -46,7 +46,7 @@ public partial class BaseCharacter : CharacterBody2D
     /// 获取方向
     /// </summary>
     /// <returns>返回当前或上一次的方向</returns>
-    public string GetDirection()
+    protected virtual string GetDirection()
     {
         if (_inputDirection == Vector2.Zero) return _animationDirection;
         _animationDirection = _inputDirection.X > 0 ? nameof(DirectionEnum.Right) :

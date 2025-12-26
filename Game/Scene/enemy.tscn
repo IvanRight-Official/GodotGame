@@ -384,7 +384,7 @@ shape = SubResource("CircleShape2D_b8828")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hjta8")
 animation = &"Move_Down"
-frame_progress = 0.1858378
+frame_progress = 0.111489214
 offset = Vector2(0, -40)
 
 [node name="Sprite2D_Shadow" type="Sprite2D" parent="."]
@@ -409,3 +409,9 @@ offset_right = 51.0
 offset_bottom = 23.0
 scale = Vector2(0.3, 0.3)
 text = "State"
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 100
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+default_color = Color(1, 0, 0.3372549, 1)
