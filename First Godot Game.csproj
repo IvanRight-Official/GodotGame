@@ -8,4 +8,7 @@
     <ItemGroup>
         <Content Include="Game\**\*.tscn"/>
     </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Script\Actor\"/>
+    </ItemGroup>
 </Project>
