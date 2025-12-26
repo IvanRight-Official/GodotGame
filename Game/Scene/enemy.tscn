@@ -384,7 +384,6 @@ shape = SubResource("CircleShape2D_b8828")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hjta8")
 animation = &"Move_Down"
-frame_progress = 0.111489214
 offset = Vector2(0, -40)
 
 [node name="Sprite2D_Shadow" type="Sprite2D" parent="."]
