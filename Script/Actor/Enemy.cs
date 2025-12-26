@@ -24,8 +24,9 @@ public partial class Enemy : BaseCharacter
     public override void _Ready()
     {
         base._Ready();
-        // 获取目标线， 起始节点和终结节点已经在编辑器中设置了，不需要代码设置了
-        _targetLine = GetNode<Line2D>("Line2D");
+        if (EnableDebug)
+            // 获取目标线， 起始节点和终结节点已经在编辑器中设置了，不需要代码设置了
+            _targetLine = GetNode<Line2D>("Line2D");
         // 拿到节点数 -> 拿到根节点 -> 根据节点Path 拿到玩家节点
         _player = GetTree().Root.GetNode<Player>("SceneRoot/Level/Player");
     }
@@ -35,8 +36,10 @@ public partial class Enemy : BaseCharacter
         base._Process(delta);
         // 本地缓存， 避免与 godot 交互两次
         Vector2 playerGlobalPosition = _player.GlobalPosition;
-        // 更新玩家和敌人之间的连线
-        _targetLine.SetPointPosition(1, ToLocal(playerGlobalPosition));
+        // 开启Debug 模式
+        if (EnableDebug)
+            // 更新玩家和敌人之间的连线
+            _targetLine.SetPointPosition(1, ToLocal(playerGlobalPosition));
         // 获取玩家和敌人之间的角度
         // 使用 Godot 原生方法获取方向，不手动翻转 Y
         GetPlayerAngle(playerGlobalPosition);

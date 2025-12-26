@@ -9,6 +9,12 @@ namespace FirstGodotGame.Script.Actor;
 public abstract partial class BaseCharacter : CharacterBody2D
 {
     /// <summary>
+    /// 是否开启debug模式
+    /// </summary>
+    [Export]
+    public bool EnableDebug { get; set; } = true;
+
+    /// <summary>
     /// 存储当前输入方向
     /// </summary>
     private Vector2 _inputDirection = Vector2.Zero;
