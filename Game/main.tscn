@@ -529,9 +529,9 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_aq0ho")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sbhkq"]
-vertices = PackedVector2Array(969.46875, 893.0625, 170, 897.9297, 594, 650, 622, 650, 526, 650, 937.5, 269.22656, 714, 650, 714, 310, 170, 287.7578, 342, 310, 342, 650, 498, 590, 366, 590, 366, 334, 690, 334, 690, 590, 622, 590, 498, 650, 526, 590, 594, 590)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 0, 6, 7), PackedInt32Array(8, 5, 7, 9), PackedInt32Array(1, 8, 9, 10), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(14, 15, 16), PackedInt32Array(1, 10, 17), PackedInt32Array(4, 1, 17), PackedInt32Array(4, 17, 11, 18), PackedInt32Array(18, 11, 14), PackedInt32Array(19, 18, 14), PackedInt32Array(19, 14, 16), PackedInt32Array(19, 16, 3, 2), PackedInt32Array(0, 3, 6)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(160, 278, 160, 908, 980, 903, 947, 259)])
+vertices = PackedVector2Array(1005.96094, 891.03125, 17.070313, 894.9531, 594, 650, 622, 650, 526, 650, 1004.03125, 259.9922, 714, 650, 714, 310, 21.921875, 259, 342, 310, 342, 650, 498, 590, 366, 590, 366, 334, 690, 334, 690, 590, 622, 590, 594, 590, 526, 590, 498, 650)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 0, 6, 7), PackedInt32Array(8, 5, 7, 9), PackedInt32Array(1, 8, 9, 10), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(14, 15, 16), PackedInt32Array(3, 6, 0), PackedInt32Array(16, 3, 2, 17), PackedInt32Array(14, 16, 17), PackedInt32Array(14, 17, 18), PackedInt32Array(11, 14, 18), PackedInt32Array(19, 11, 18, 4), PackedInt32Array(19, 4, 1), PackedInt32Array(1, 10, 19)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(12, 249, 1014, 250, 1016, 901, 7, 905)])
 source_geometry_mode = 2
 
 [node name="SceneRoot" type="Node2D"]
