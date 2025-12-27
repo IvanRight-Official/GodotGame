@@ -7,6 +7,17 @@ namespace FirstGodotGame.Script.State.EnemyState;
 public partial class EnemyMove : EnemyState
 {
     /// <summary>
+    /// 移动速度，单位为 像素/秒
+    /// </summary>
+    [Export]
+    public int Speed { get; set; } = 100;
+
+    /// <summary>
+    /// 加速度
+    /// </summary>
+    private const float Accelerate = 15f;
+
+    /// <summary>
     /// 玩家逃脱半径
     /// </summary>
     [Export]
@@ -53,6 +64,8 @@ public partial class EnemyMove : EnemyState
         //将结果存储在 _direction 字段中，供物理更新时使用
         //这个方向向量通常会在 UpdatePhysics 方法中用于实际的移动逻辑
         _direction = Enemy.GlobalPosition.DirectionTo(_navigationAgent2D.GetNextPathPosition());
+        Enemy.Velocity = Enemy.Velocity.Lerp(_direction * Speed, (float)(Accelerate * delta));
+        Enemy.MoveAndSlide();
     }
 
 
