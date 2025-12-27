@@ -420,4 +420,7 @@ default_color = Color(1, 0, 0.3372549, 1)
 color = Color(1, 1, 1, 0.23529412)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 40.0
 debug_enabled = true
+
+[node name="Timer_PlayerPosition" type="Timer" parent="."]

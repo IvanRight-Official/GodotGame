@@ -10,7 +10,7 @@ public partial class EnemyMove : EnemyState
     /// 移动速度，单位为 像素/秒
     /// </summary>
     [Export]
-    public int Speed { get; set; } = 100;
+    public int Speed { get; set; } = 50;
 
     /// <summary>
     /// 加速度
@@ -56,6 +56,10 @@ public partial class EnemyMove : EnemyState
     public override void UpdatePhysics(double delta)
     {
         base.UpdatePhysics(delta);
+        // 必须要先获取导航系统计算出的下一个路径点位置， 否则 IsTargetReached() 不会生效
+        Vector2 nextPathPosition = _navigationAgent2D.GetNextPathPosition();
+        // 如果已经到达目标位置，则不需要再移动
+        if (_navigationAgent2D.IsTargetReached()) return;
         // Enemy.GlobalPosition: 获取敌人的全局世界坐标位置
         //_navigationAgent2D.GetNextPathPosition(): 获取导航系统计算出的下一个路径点的位置
         //DirectionTo(): Godot引擎的内置方法，计算从当前位置到目标位置的单位方向向量
@@ -63,8 +67,8 @@ public partial class EnemyMove : EnemyState
         //计算敌人应该朝哪个方向移动才能到达下一个导航路径点
         //将结果存储在 _direction 字段中，供物理更新时使用
         //这个方向向量通常会在 UpdatePhysics 方法中用于实际的移动逻辑
-        _direction = Enemy.GlobalPosition.DirectionTo(_navigationAgent2D.GetNextPathPosition());
-        Enemy.Velocity = Enemy.Velocity.Lerp(_direction * Speed, (float)(Accelerate * delta));
+        _direction = Enemy.GlobalPosition.DirectionTo(nextPathPosition);
+        Enemy.Velocity = Enemy.Velocity.Lerp(_direction * Speed, (float)delta);
         Enemy.MoveAndSlide();
     }
 
