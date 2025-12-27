@@ -1,3 +1,5 @@
+using FirstGodotGame.Script.Actor;
+
 using Godot;
 
 namespace FirstGodotGame.Script.State.EnemyState;
@@ -15,11 +17,22 @@ public partial class EnemyMove : EnemyState
     /// </summary>
     private NavigationAgent2D _navigationAgent2D;
 
-    public override void _Ready()
+    /// <summary>
+    /// 移动方向（归一化方向向量）
+    /// </summary>
+    private Vector2 _direction;
+
+    public override void Init(BaseCharacter actor)
     {
-        base._Ready();
+        base.Init(actor);
         _navigationAgent2D = Owner.GetNode<NavigationAgent2D>("NavigationAgent2D");
     }
+
+    // public override void _Ready()
+    // {
+    //     base._Ready();
+    //     _navigationAgent2D = Owner.GetNode<NavigationAgent2D>("NavigationAgent2D");
+    // }
 
     public override void Update()
     {
@@ -27,6 +40,19 @@ public partial class EnemyMove : EnemyState
         Enemy.UpdateAnimation();
         DetectPlayer();
         MoveToPlayer();
+    }
+
+    public override void UpdatePhysics(double delta)
+    {
+        base.UpdatePhysics(delta);
+        // Enemy.GlobalPosition: 获取敌人的全局世界坐标位置
+        //_navigationAgent2D.GetNextPathPosition(): 获取导航系统计算出的下一个路径点的位置
+        //DirectionTo(): Godot引擎的内置方法，计算从当前位置到目标位置的单位方向向量
+        //实际作用
+        //计算敌人应该朝哪个方向移动才能到达下一个导航路径点
+        //将结果存储在 _direction 字段中，供物理更新时使用
+        //这个方向向量通常会在 UpdatePhysics 方法中用于实际的移动逻辑
+        _direction = Enemy.GlobalPosition.DirectionTo(_navigationAgent2D.GetNextPathPosition());
     }
 
 

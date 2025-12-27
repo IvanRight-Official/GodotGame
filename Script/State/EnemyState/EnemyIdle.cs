@@ -1,3 +1,5 @@
+using FirstGodotGame.Script.Actor;
+
 using Godot;
 
 namespace FirstGodotGame.Script.State.EnemyState;
@@ -16,23 +18,54 @@ public partial class EnemyIdle : EnemyState
     /// </summary>
     private Polygon2D _polygon2D;
 
-    public override void _Ready()
+    /// <summary>
+    /// 不用_Ready 是因为 Enemy 此时还是为空的， 因为Init方法在 _Ready 方法之后执行， 此时拿到 Enemy 是空对象还未 注入进来
+    /// </summary>
+    /// <param name="actor">角色</param>
+    public override void Init(BaseCharacter actor)
     {
-        base._Ready();
+        base.Init(actor);
+        DebugModel();
+    }
+
+    /// <summary>
+    /// 开启debug模式
+    /// </summary>
+    private void DebugModel()
+    {
         if (Enemy.EnableDebug)
             // 拿到多边形节点
             _polygon2D = Owner.GetNode<Polygon2D>("Polygon2D");
+        else
+            Owner.GetNode<Polygon2D>("Polygon2D").Visible = false;
     }
+
+    // public override void _Ready()
+    // {
+    //     base._Ready();
+    //     if (Enemy.EnableDebug)
+    //         // 拿到多边形节点
+    //         _polygon2D = Owner.GetNode<Polygon2D>("Polygon2D");
+    // }
 
     public override void Update()
     {
         base.Update();
+        // 疑问： 是否需要更新动画?
         DetectPlayer();
     }
 
     public override void Enter()
     {
         base.Enter();
+        ProcessEnterDebugModel();
+    }
+
+    /// <summary>
+    /// 处理debug模式之进入逻辑
+    /// </summary>
+    private void ProcessEnterDebugModel()
+    {
         if (Enemy.EnableDebug)
             // 千万要记住，只绘制一次的逻辑，一定不要写到 Update 或者 UpdatePhysics 中
             CreatePolygonCircle();
@@ -41,6 +74,14 @@ public partial class EnemyIdle : EnemyState
     public override void Exit()
     {
         base.Exit();
+        ProcessExitDebugModel();
+    }
+
+    /// <summary>
+    /// 处理debug模式之离开逻辑
+    /// </summary>
+    private void ProcessExitDebugModel()
+    {
         if (Enemy.EnableDebug) _polygon2D.Polygon = [];
     }
 

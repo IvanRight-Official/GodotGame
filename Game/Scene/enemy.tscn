@@ -377,6 +377,7 @@ animations = [{
 y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_qynk5")
+EnableDebug = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_b8828")
@@ -417,3 +418,6 @@ default_color = Color(1, 0, 0.3372549, 1)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(1, 1, 1, 0.23529412)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
