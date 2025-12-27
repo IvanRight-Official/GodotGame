@@ -42,6 +42,7 @@ public partial class EnemyMove : EnemyState
     {
         base.Init(actor);
         _navigationAgent2D = Owner.GetNode<NavigationAgent2D>("NavigationAgent2D");
+        _navigationAgent2D.VelocityComputed += OnVelocityComputed;
         _timerUpdatePlayerPosition = Owner.GetNode<Timer>("Timer_UpdatePlayerPosition");
     }
 
@@ -63,26 +64,48 @@ public partial class EnemyMove : EnemyState
     public override void UpdatePhysics(double delta)
     {
         base.UpdatePhysics(delta);
-        // 必须要先获取导航系统计算出的下一个路径点位置， 否则 IsTargetReached() 不会生效
+
+        // Do not query when the map has never synchronized and is empty.
+        if (NavigationServer2D.MapGetIterationId(_navigationAgent2D.GetNavigationMap()) ==
+            0) return;
+
+        // 1. 必须要先获取导航系统计算出的下一个路径点位置， 否则 IsTargetReached() 不会生效
         Vector2 nextPathPosition = _navigationAgent2D.GetNextPathPosition();
-        // 如果已经到达目标位置，则不需要再移动
+        // 2. 如果已经到达目标位置，则不需要再移动
         if (_navigationAgent2D.IsTargetReached()) return;
         // Enemy.GlobalPosition: 获取敌人的全局世界坐标位置
         //_navigationAgent2D.GetNextPathPosition(): 获取导航系统计算出的下一个路径点的位置
         //DirectionTo(): Godot引擎的内置方法，计算从当前位置到目标位置的单位方向向量
-        //实际作用
+        // 3. 实际作用
         //计算敌人应该朝哪个方向移动才能到达下一个导航路径点
         //将结果存储在 _direction 字段中，供物理更新时使用
         //这个方向向量通常会在 UpdatePhysics 方法中用于实际的移动逻辑
         _direction = Enemy.GlobalPosition.DirectionTo(nextPathPosition);
-        Enemy.Velocity = Enemy.Velocity.Lerp(_direction * Speed, (float)delta);
-        Enemy.MoveAndSlide();
+        // Enemy.Velocity = Enemy.Velocity.Lerp(_direction * Speed, (float)delta);
+        // Enemy.MoveAndSlide();
+        // 4. 计算“期望速度” (注意：这里不要直接 MoveAndSlide)
+        Vector2 desiredVelocity = _direction * Speed;
+
+        // 5. 提交给避障系统（这会触发 VelocityComputed 信号） 避障开启后， 会
+        if (_navigationAgent2D.AvoidanceEnabled)
+        {
+            // 不需要 delta 参与运算， 在回调中已经处理好了
+            _navigationAgent2D.Velocity = desiredVelocity;
+        }
+        else
+        {
+            // 如果没开避障，则手动处理
+            Enemy.Velocity = Enemy.Velocity.Lerp(desiredVelocity, (float)delta);
+            Enemy.MoveAndSlide();
+        }
     }
 
     public override void Enter()
     {
         base.Enter();
         _timerUpdatePlayerPosition.Start();
+        // 立即寻路一次，消除第一帧延迟
+        TargetPlayer();
     }
 
     public override void Exit()
@@ -121,4 +144,27 @@ public partial class EnemyMove : EnemyState
         DetectPlayer();
         TargetPlayer();
     }
+
+    /// <summary>
+    /// 避障行动
+    /// </summary>
+    /// <param name="safeVelocity"></param>
+    public void OnVelocityComputed(Vector2 safeVelocity)
+    {
+        // 只有在当前移动状态才处理回调
+        if (StateMachine.CurrentState != this) return;
+
+        // 直接使用避障计算出的安全速度
+        // [严谨] 不要用 +=，不要乘 delta，直接赋值
+        Enemy.Velocity = safeVelocity;
+
+        // 在这里执行物理位移
+        Enemy.MoveAndSlide();
+    }
+    // 有问题的实现，详解doc
+    // public void OnNavigationAgent2dVelocityComputed(Vector2 safeVelocity)
+    // {
+    //     if (StateMachine.CurrentState == this && !_navigationAgent2D.IsTargetReached())
+    //         Enemy.Velocity += safeVelocity * (float)GetPhysicsProcessDeltaTime();
+    // }
 }
