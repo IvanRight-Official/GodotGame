@@ -1,10 +1,8 @@
-using FirstGodotGame.Script.Actor;
-
 using Godot;
 
 namespace FirstGodotGame.Script.State.EnemyState;
 
-public partial class EnemyIdle : Core.State
+public partial class EnemyIdle : EnemyState
 {
     /// <summary>
     /// 玩家检测半径
@@ -21,7 +19,7 @@ public partial class EnemyIdle : Core.State
     public override void _Ready()
     {
         base._Ready();
-        if (Actor.EnableDebug)
+        if (Enemy.EnableDebug)
             // 拿到多边形节点
             _polygon2D = Owner.GetNode<Polygon2D>("Polygon2D");
     }
@@ -35,7 +33,7 @@ public partial class EnemyIdle : Core.State
     public override void Enter()
     {
         base.Enter();
-        if (Actor.EnableDebug)
+        if (Enemy.EnableDebug)
             // 千万要记住，只绘制一次的逻辑，一定不要写到 Update 或者 UpdatePhysics 中
             CreatePolygonCircle();
     }
@@ -43,7 +41,7 @@ public partial class EnemyIdle : Core.State
     public override void Exit()
     {
         base.Exit();
-        if (Actor.EnableDebug) _polygon2D.Polygon = [];
+        if (Enemy.EnableDebug) _polygon2D.Polygon = [];
     }
 
     /// <summary>
@@ -68,10 +66,7 @@ public partial class EnemyIdle : Core.State
     /// </summary>
     private void DetectPlayer()
     {
-        // 计算敌人和玩家之间的距离
-        var enemy = (Enemy)Actor;
-        float distance = enemy.GlobalPosition.DistanceTo(enemy.Player.GlobalPosition);
-        if (distance <= PlayerDetectionRadius)
+        if (GetEnemyAndPlayerDistance() <= PlayerDetectionRadius)
             // 玩家在附近，切换状态
             StateMachine.ChangeState("Move");
     }
