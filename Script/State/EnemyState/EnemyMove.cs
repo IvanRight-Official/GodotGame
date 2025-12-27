@@ -33,10 +33,16 @@ public partial class EnemyMove : EnemyState
     /// </summary>
     private Vector2 _direction;
 
+    /// <summary>
+    /// 定时器
+    /// </summary>
+    private Timer _timerUpdatePlayerPosition;
+
     public override void Init(BaseCharacter actor)
     {
         base.Init(actor);
         _navigationAgent2D = Owner.GetNode<NavigationAgent2D>("NavigationAgent2D");
+        _timerUpdatePlayerPosition = Owner.GetNode<Timer>("Timer_UpdatePlayerPosition");
     }
 
     // public override void _Ready()
@@ -49,8 +55,9 @@ public partial class EnemyMove : EnemyState
     {
         base.Update();
         Enemy.UpdateAnimation();
-        DetectPlayer();
-        MoveToPlayer();
+        // 将检测玩家距离和移动到玩家放到定时器中执行，避免CPU压力过大
+        // DetectPlayer();
+        // TargetPlayer();
     }
 
     public override void UpdatePhysics(double delta)
@@ -72,6 +79,18 @@ public partial class EnemyMove : EnemyState
         Enemy.MoveAndSlide();
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        _timerUpdatePlayerPosition.Start();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _timerUpdatePlayerPosition.Stop();
+    }
+
 
     /// <summary>
     /// 检测玩家距离，并判断是否进入移动状态
@@ -85,10 +104,21 @@ public partial class EnemyMove : EnemyState
     }
 
     /// <summary>
-    /// 朝玩家移动
+    /// 指定目标位置为玩家
     /// </summary>
-    private void MoveToPlayer()
+    private void TargetPlayer()
     {
         _navigationAgent2D.TargetPosition = Enemy.Player.GlobalPosition;
+    }
+
+    /// <summary>
+    /// 定时器：<see cref="_timerUpdatePlayerPosition"/> 的 Timeout 的信号监听
+    /// 默认 0.5 秒触发一次
+    /// </summary>
+    public void OnTimerUpdatePlayerPositionTimeout()
+    {
+        // 检测玩家距离和移动到玩家 改为 定时器触发， 不再 Update() 中频繁执行， 减轻CPU 压力
+        DetectPlayer();
+        TargetPlayer();
     }
 }
