@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch7311h3mlwg1"]
+
+[ext_resource type="Texture2D" uid="uid://bbf6hfj00436y" path="res://Asset/Level/TreeAndGrass.png" id="1_xeqp7"]
+
+[node name="tree" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xeqp7")
+offset = Vector2(0, -40)
+region_enabled = true
+region_rect = Rect2(48, 0, 64, 96)

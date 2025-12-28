@@ -94,7 +94,7 @@ public partial class EnemyMove : EnemyState
         }
         else
         {
-            // 如果没开避障，则手动处理
+            // 如果没开避障，则手动处理 （更细致一点的优化就是调用 OnVelocityComputed 方法进行执行，达到复用）
             Enemy.Velocity = Enemy.Velocity.Lerp(desiredVelocity, (float)delta);
             Enemy.MoveAndSlide();
         }
