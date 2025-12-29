@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://ceg47bpfol78g"]
+[gd_scene load_steps=18 format=4 uid="uid://ceg47bpfol78g"]
 
 [ext_resource type="Texture2D" uid="uid://5h7aiwkmrmsr" path="res://Asset/Level/Background_Grass.png" id="1_xb63x"]
 [ext_resource type="PackedScene" uid="uid://dtn4iers0u62x" path="res://Game/Scene/player.tscn" id="2_f5lw1"]
@@ -535,6 +535,12 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(12, 249, 1014, 250, 1016, 901, 7, 905)])
 source_geometry_mode = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wi015"]
+size = Vector2(50, 1018)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bktqc"]
+size = Vector2(1014, 50)
+
 [node name="SceneRoot" type="Node2D"]
 
 [node name="TileMapLayer_BackGroud" type="TileMapLayer" parent="."]
@@ -631,22 +637,43 @@ position = Vector2(679, 717)
 y_sort_enabled = true
 
 [node name="tree" parent="Level/TreeGroup" instance=ExtResource("8_wi015")]
-position = Vector2(340, 928)
+position = Vector2(348, 917)
 
 [node name="tree2" parent="Level/TreeGroup" instance=ExtResource("8_wi015")]
-position = Vector2(426, 921)
+position = Vector2(393, 906)
 
 [node name="tree3" parent="Level/TreeGroup" instance=ExtResource("8_wi015")]
-position = Vector2(389, 954)
+position = Vector2(404, 941)
 
 [node name="tree4" parent="Level/TreeGroup" instance=ExtResource("8_wi015")]
-position = Vector2(442, 964)
+position = Vector2(454, 924)
 
 [node name="tree5" parent="Level/TreeGroup" instance=ExtResource("8_wi015")]
-position = Vector2(385, 902)
+position = Vector2(500, 947)
 
 [node name="tree6" parent="Level/TreeGroup" instance=ExtResource("8_wi015")]
-position = Vector2(295, 932)
+position = Vector2(502, 901)
 
 [node name="tree7" parent="Level/TreeGroup" instance=ExtResource("8_wi015")]
-position = Vector2(336, 971)
+position = Vector2(450, 964)
+
+[node name="tree8" parent="Level/TreeGroup" instance=ExtResource("8_wi015")]
+position = Vector2(361, 952)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(26, 511)
+shape = SubResource("RectangleShape2D_wi015")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(996, 513)
+shape = SubResource("RectangleShape2D_wi015")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(510, 25)
+shape = SubResource("RectangleShape2D_bktqc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(508, 996)
+shape = SubResource("RectangleShape2D_bktqc")
