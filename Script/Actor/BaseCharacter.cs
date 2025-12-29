@@ -40,6 +40,8 @@ public abstract partial class BaseCharacter : CharacterBody2D
     /// </summary>
     private string _animationDirection = nameof(DirectionEnum.Down);
 
+    public string AnimationDirection => _animationDirection;
+
     public override void _Ready()
     {
         // https://docs.godotengine.org/zh-cn/4.4/tutorials/scripting/c_sharp/c_sharp_differences.html#onready-annotation
