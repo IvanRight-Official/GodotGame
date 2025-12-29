@@ -66,6 +66,8 @@ public partial class PlayerAttack : PlayerState
 
     public void OnAreaEntered(Area2D area)
     {
-        GD.Print(area.GetParent());
+        // GD.Print(area.GetParent());
+        Node node = area.GetParent();
+        if (node is Enemy enemy) enemy.HandleHit(Player.AttackDamage);
     }
 }

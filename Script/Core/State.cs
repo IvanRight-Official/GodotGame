@@ -54,7 +54,8 @@ public abstract partial class State : Node
     /// </summary>
     public virtual void Update()
     {
-        if (_stateMachine.DebugLabel != null) _stateMachine.DebugLabel.Text = Name;
+        if (_stateMachine.DebugLabel != null)
+            _stateMachine.DebugLabel.Text = Name + " / " + Actor.CurrentHealth;
     }
 
     /// <summary>

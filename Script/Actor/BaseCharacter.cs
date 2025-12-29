@@ -15,6 +15,38 @@ public abstract partial class BaseCharacter : CharacterBody2D
     public bool EnableDebug { get; set; } = true;
 
     /// <summary>
+    /// 最大生命值
+    /// </summary>
+    [Export]
+    public int MaxHealth { get; set; } = 100;
+
+    /// <summary>
+    /// 攻击伤害
+    /// </summary>
+    [Export]
+    public int AttackDamage { get; set; } = 50;
+
+    /// <summary>
+    /// 是否死亡
+    /// </summary>
+    private bool _isDead = false;
+
+    private int _currentHealth;
+
+    /// <summary>
+    /// 当前生命值
+    /// </summary>
+    public int CurrentHealth
+    {
+        get => _currentHealth;
+        set
+        {
+            _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+            if (_currentHealth == 0) _isDead = true;
+        }
+    }
+
+    /// <summary>
     /// 存储当前输入方向
     /// </summary>
     private Vector2 _inputDirection = Vector2.Zero;
@@ -48,6 +80,9 @@ public abstract partial class BaseCharacter : CharacterBody2D
         // 绑定godot中Player场景的动画节点
         _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         _stateMachine = GetNode<StateMachine>("StateMachine");
+
+        // 初始化生命值为最大值
+        _currentHealth = MaxHealth;
     }
 
     /// <summary>
@@ -69,5 +104,15 @@ public abstract partial class BaseCharacter : CharacterBody2D
     public void UpdateAnimation()
     {
         _animatedSprite2D.Play(_stateMachine.CurrentState.Name + "_" + GetDirection());
+    }
+
+    /// <summary>
+    /// 处理受击
+    /// </summary>
+    /// <param name="damage">伤害</param>
+    public void HandleHit(int damage)
+    {
+        if (_isDead) return;
+        CurrentHealth -= damage;
     }
 }
