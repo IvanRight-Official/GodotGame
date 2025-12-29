@@ -8,6 +8,8 @@
 
 [node name="Grass" type="Area2D"]
 y_sort_enabled = true
+collision_layer = 512
+collision_mask = 2
 script = ExtResource("1_3284k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

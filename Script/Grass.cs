@@ -96,7 +96,7 @@ public partial class Grass : Area2D
     /// <param name="duration">持续时间</param>
     private void CreateNewGrassTween(Vector2 targetScale, float duration)
     {
-        if (_frontTween != null) _frontTween.Kill();
+        _frontTween?.Kill();
 
         _frontTween = GetTree().CreateTween();
         _frontTween.TweenProperty(_frontSprite2D, "scale", targetScale, duration)
