@@ -495,6 +495,11 @@ offset = Vector2(0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+limit_left = 0
+limit_top = 0
+limit_right = 1024
+limit_bottom = 1024
+limit_smoothed = true
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("5_vvvbf")
