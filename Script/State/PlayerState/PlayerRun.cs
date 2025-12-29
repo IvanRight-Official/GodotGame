@@ -18,13 +18,6 @@ public partial class PlayerRun : PlayerState
     {
         base.UpdatePhysics(delta);
 
-        // 当按键抬起时， 切换为 Idle 状态
-        if (Player.InputDirection == Vector2.Zero)
-        {
-            StateMachine.ChangeState("Idle");
-            return;
-        }
-
         // 平滑过渡到目标速度
         // Velocity.Lerp：线性插值方法  第一个参数：_inputDirection * Speed - 目标速度向量 第二个参数：(float)(Accelerate * delta) - 插值因子
         Player.Velocity =
@@ -38,5 +31,16 @@ public partial class PlayerRun : PlayerState
         // 必须调用父类方法， 这是为了以后扩展的时候， 不需要修改代码
         base.Update();
         Player.UpdateAnimation();
+
+
+        // 当按键抬起时， 切换为 Idle 状态
+        if (Player.InputDirection == Vector2.Zero)
+        {
+            StateMachine.ChangeState("Idle");
+            return;
+        }
+
+        // 检测是否按下了攻击按键
+        if (Input.IsActionJustPressed("Attack")) StateMachine.ChangeState("Attack");
     }
 }

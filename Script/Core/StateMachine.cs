@@ -37,11 +37,17 @@ public partial class StateMachine : Node
     /// <summary>
     /// 用于调试使用的标签
     /// </summary>
-    public Label DebugLabel;
+    public Label DebugLabel { get; set; }
+
+    /// <summary>
+    /// 动画节点
+    /// </summary>
+    public AnimatedSprite2D AnimatedSprite2D { get; set; }
 
     public override void _Ready()
     {
-        DebugLabel = GetParent().GetNode<Label>("DebugLabel");
+        DebugLabel = Owner.GetNode<Label>("DebugLabel");
+        AnimatedSprite2D = Owner.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         // 获取所有子节点，即状态节点 这里使用 Godot.Collections.Array 是因为与 godot 的api进行交互
         Array<Node> children = GetChildren();
         foreach (Node child in children)
