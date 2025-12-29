@@ -34,12 +34,12 @@ public partial class PlayerAttack : PlayerState
     {
         base.Update();
 
-        int currentAttackFrame = StateMachine.AnimatedSprite2D.Frame;
+        int currentAttackFrame = Player.AnimatedSprite2D.Frame;
         // 攻击动画播放到第 2 帧时， 开启攻击区域 到第五帧时， 关闭攻击区域
         _currentAttackShape.Disabled = currentAttackFrame is < 2 or >= 5;
 
         // 如果攻击动画还在播放，就不切换状态
-        if (StateMachine.AnimatedSprite2D.IsPlaying()) return;
+        if (Player.AnimatedSprite2D.IsPlaying()) return;
         // 攻击动画已经播放完了， 开始切换状态
         StateMachine.ChangeState("Idle");
     }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dj2tea60maj5d"]
+[gd_scene load_steps=43 format=3 uid="uid://dj2tea60maj5d"]
 
 [ext_resource type="Script" uid="uid://b8ggbctu2tb8o" path="res://Script/Actor/Enemy.cs" id="1_qynk5"]
 [ext_resource type="Texture2D" uid="uid://blt6ycapyx33v" path="res://Asset/Animations/Enemy_Idle_Move_Hurt.png" id="1_qyr5w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cxnypjncr08bq" path="res://Script/State/EnemyState/EnemyIdle.cs" id="5_8ql2b"]
 [ext_resource type="Script" uid="uid://cnot6bydf4l0c" path="res://Script/Core/StateMachine.cs" id="5_k5ifa"]
 [ext_resource type="Script" uid="uid://vilydg28hwhr" path="res://Script/State/EnemyState/EnemyMove.cs" id="6_w6u1f"]
+[ext_resource type="Script" uid="uid://c2wr65opb8nfc" path="res://Script/State/EnemyState/EnemyHurt.cs" id="7_qourr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b8828"]
 radius = 4.0
@@ -140,6 +141,122 @@ region = Rect2(448, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hjta8"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qynk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5rr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ql2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6u1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qourr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8n67n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7bdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqbao")
+}],
+"loop": false,
+"name": &"Hurt_Down",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5ifa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnqxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vse5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lu1pr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcb5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvywq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5v3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnn8h")
+}],
+"loop": false,
+"name": &"Hurt_Left",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vqqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66pof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rakd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td64t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_823m2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfxv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qljlu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ckqu")
+}],
+"loop": false,
+"name": &"Hurt_Right",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmcqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nn41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgeat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiqcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnp1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3rb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxema")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drwol")
+}],
+"loop": false,
+"name": &"Hurt_Up",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qynk5")
@@ -387,7 +504,7 @@ shape = SubResource("CircleShape2D_b8828")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hjta8")
-animation = &"Move_Down"
+animation = &"Hurt_Down"
 offset = Vector2(0, -40)
 
 [node name="Sprite2D_Shadow" type="Sprite2D" parent="."]
@@ -404,6 +521,9 @@ script = ExtResource("5_8ql2b")
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("6_w6u1f")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("7_qourr")
 
 [node name="DebugLabel" type="Label" parent="."]
 z_index = 100

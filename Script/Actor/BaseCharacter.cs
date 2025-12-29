@@ -65,6 +65,8 @@ public abstract partial class BaseCharacter : CharacterBody2D
     /// </summary>
     private AnimatedSprite2D _animatedSprite2D;
 
+    public AnimatedSprite2D AnimatedSprite2D => _animatedSprite2D;
+
     private StateMachine _stateMachine;
 
     /// <summary>
@@ -114,5 +116,12 @@ public abstract partial class BaseCharacter : CharacterBody2D
     {
         if (_isDead) return;
         CurrentHealth -= damage;
+        if (_isDead)
+        {
+        }
+        else
+        {
+            _stateMachine.ChangeState("Hurt");
+        }
     }
 }
