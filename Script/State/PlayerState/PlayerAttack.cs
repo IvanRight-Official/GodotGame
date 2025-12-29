@@ -49,11 +49,23 @@ public partial class PlayerAttack : PlayerState
         base.Init(actor);
 
         _attackArea = Owner.GetNode<Area2D>("Area2D_Attack_Hitbox");
+        _attackArea.AreaEntered += OnAreaEntered;
         foreach (Node child in _attackArea.GetChildren())
             if (child is CollisionShape2D collisionShape2D)
             {
                 collisionShape2D.Disabled = true;
                 _attackObjects[child.Name] = collisionShape2D;
             }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _currentAttackShape.Disabled = true;
+    }
+
+    public void OnAreaEntered(Area2D area)
+    {
+        GD.Print(area.GetParent());
     }
 }

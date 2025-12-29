@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dj2tea60maj5d"]
+[gd_scene load_steps=42 format=3 uid="uid://dj2tea60maj5d"]
 
 [ext_resource type="Script" uid="uid://b8ggbctu2tb8o" path="res://Script/Actor/Enemy.cs" id="1_qynk5"]
 [ext_resource type="Texture2D" uid="uid://blt6ycapyx33v" path="res://Asset/Animations/Enemy_Idle_Move_Hurt.png" id="1_qyr5w"]
@@ -373,6 +373,9 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_w6u1f"]
+radius = 20.0
+
 [node name="Enemy" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -426,5 +429,13 @@ max_speed = 20.0
 
 [node name="Timer_UpdatePlayerPosition" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="Area2D_Hurt_Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_Hurt_Hitbox"]
+position = Vector2(0, -26)
+shape = SubResource("CircleShape2D_w6u1f")
 
 [connection signal="timeout" from="Timer_UpdatePlayerPosition" to="StateMachine/Move" method="OnTimerUpdatePlayerPositionTimeout"]
