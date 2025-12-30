@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://vx7r3letihh3"]
+
+[ext_resource type="Texture2D" uid="uid://c3bajedk3umbl" path="res://Asset/VFX/SwordSlash.png" id="1_682up"]
+[ext_resource type="Script" uid="uid://bl1k7rfoyp0ee" path="res://Script/SwordSlash.cs" id="2_3xuy5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxjhi"]
+atlas = ExtResource("1_682up")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scfxf"]
+atlas = ExtResource("1_682up")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6wwv"]
+atlas = ExtResource("1_682up")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_486cx"]
+atlas = ExtResource("1_682up")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jmp0d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxjhi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scfxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6wwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_486cx")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="SwordSlash" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_jmp0d")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
+script = ExtResource("2_3xuy5")

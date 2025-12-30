@@ -56,7 +56,7 @@ public partial class Grass : Area2D
         _grassCutVfx = ResourceLoader.Load<PackedScene>("uid://cfxjvqkl1i4um");
 
         // 创建补间动画器：前景图
-        Tween frontTween = GetTree().CreateTween().SetLoops();
+        Tween frontTween = GetTree().CreateTween().SetLoops().BindNode(this);
         float frontStartSkew = Mathf.DegToRad(GD.RandRange(-10, 10));
         float frontEndSkew = -frontStartSkew;
         frontTween.TweenProperty(_frontSprite2D, "skew", frontEndSkew, 1.5f).From(frontStartSkew);
@@ -67,7 +67,7 @@ public partial class Grass : Area2D
         // 创建补间动画器：背景图
         float backStartSkew = frontEndSkew * 0.5f;
         float backEndSkew = -backStartSkew;
-        Tween backTween = GetTree().CreateTween().SetLoops();
+        Tween backTween = GetTree().CreateTween().SetLoops().BindNode(this);
         backTween.TweenProperty(_backSprite2D, "skew", backEndSkew, 1.5f).From(backStartSkew);
         backTween.TweenProperty(_backSprite2D, "skew", backStartSkew, 1.5f).From(backEndSkew);
         backTween.SetEase(Tween.EaseType.InOut);

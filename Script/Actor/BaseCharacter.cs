@@ -31,6 +31,8 @@ public abstract partial class BaseCharacter : CharacterBody2D
     /// </summary>
     private bool _isDead = false;
 
+    public bool IsDead => _isDead;
+
     private int _currentHealth;
 
     /// <summary>
