@@ -130,12 +130,12 @@ public abstract partial class BaseCharacter : CharacterBody2D
     /// 处理闪烁
     /// </summary>
     /// <param name="mixWeight">混合权重</param>
-    public void HandleBlink(float mixWeight)
+    private void HandleBlink(float mixWeight)
     {
         AnimatedSprite2D.SetInstanceShaderParameter("Blink", mixWeight);
     }
 
-    public void StartBlink()
+    private void StartBlink()
     {
         Tween blinkTween = GetTree().CreateTween();
         blinkTween.TweenMethod(Callable.From<float>(HandleBlink), 1.0, 0.0, 0.3);

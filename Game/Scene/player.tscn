@@ -747,7 +747,7 @@ text = "State"
 
 [node name="Area2D_Attack_Hitbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 516
 
 [node name="CollisionShape2D_Up" type="CollisionShape2D" parent="Area2D_Attack_Hitbox"]
 position = Vector2(0, -40)

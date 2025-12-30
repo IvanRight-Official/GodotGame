@@ -41,6 +41,9 @@ public partial class Grass : Area2D
     /// </summary>
     private Vector2 _frontLeaveScale = new(1f, 1f);
 
+
+    private PackedScene _grassCutVfx;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -50,6 +53,7 @@ public partial class Grass : Area2D
         // 绑定godot中Grass场景的背景图片
         _backSprite2D ??= GetNode<Sprite2D>("Sprite2D_Back");
         _frontSprite2D ??= GetNode<Sprite2D>("Sprite2D");
+        _grassCutVfx = ResourceLoader.Load<PackedScene>("uid://cfxjvqkl1i4um");
 
         // 创建补间动画器：前景图
         Tween frontTween = GetTree().CreateTween().SetLoops();
@@ -101,5 +105,22 @@ public partial class Grass : Area2D
         _frontTween = GetTree().CreateTween();
         _frontTween.TweenProperty(_frontSprite2D, "scale", targetScale, duration)
             .SetEase(Tween.EaseType.Out);
+    }
+
+    /// <summary>
+    /// 处理草地被砍
+    /// </summary>
+    public void HandleCut()
+    {
+        // 停止 grassTween
+        _frontTween?.Kill();
+
+        // 创建 grassCutVfx
+        GrassCutVfx grassCutVfx = _grassCutVfx.Instantiate<GrassCutVfx>();
+        grassCutVfx.GlobalPosition = GlobalPosition;
+        GetParent().AddChild(grassCutVfx);
+
+        // 释放自身
+        QueueFree();
     }
 }

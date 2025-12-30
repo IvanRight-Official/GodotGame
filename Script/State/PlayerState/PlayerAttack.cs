@@ -69,5 +69,6 @@ public partial class PlayerAttack : PlayerState
         // GD.Print(area.GetParent());
         Node node = area.GetParent();
         if (node is Enemy enemy) enemy.HandleHit(Player.AttackDamage);
+        if (area is Grass grass) grass.HandleCut();
     }
 }
