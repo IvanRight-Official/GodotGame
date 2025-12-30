@@ -16,4 +16,12 @@ public partial class EnemyHurt : EnemyState
         // 攻击动画已经播放完了， 开始切换状态
         StateMachine.ChangeState("Idle");
     }
+
+    public override void UpdatePhysics(double delta)
+    {
+        base.UpdatePhysics(delta);
+        if (Enemy.AnimatedSprite2D.Frame == 0)
+            // 如果动画刚刚开始， 则处理受击效果
+            Enemy.MoveAndCollide(Enemy.HurtDirection * 100 * (float)delta);
+    }
 }

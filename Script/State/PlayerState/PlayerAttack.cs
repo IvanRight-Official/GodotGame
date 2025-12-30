@@ -81,7 +81,7 @@ public partial class PlayerAttack : PlayerState
         Node node = area.GetParent();
         if (node is Enemy enemy)
         {
-            enemy.HandleHit(Player.AttackDamage);
+            enemy.HandleHit(Player.AttackDamage, Player.GlobalPosition);
             if (!enemy.IsDead) HandleSpawnSlash(enemy.GlobalPosition);
         }
 

@@ -78,6 +78,12 @@ public abstract partial class BaseCharacter : CharacterBody2D
 
     public string AnimationDirection => _animationDirection;
 
+
+    /// <summary>
+    /// 受击方向
+    /// </summary>
+    public Vector2 HurtDirection { get; set; }
+
     public override void _Ready()
     {
         // https://docs.godotengine.org/zh-cn/4.4/tutorials/scripting/c_sharp/c_sharp_differences.html#onready-annotation
@@ -114,13 +120,17 @@ public abstract partial class BaseCharacter : CharacterBody2D
     /// 处理受击
     /// </summary>
     /// <param name="damage">伤害</param>
-    public void HandleHit(int damage)
+    /// <param name="hitPosition"></param>
+    ///
+    public void HandleHit(int damage, Vector2 hitPosition = default)
     {
         if (_isDead) return;
         // 添加受击闪烁动画
         StartBlink();
         // 减去伤害
         CurrentHealth -= damage;
+        // 受击方向
+        HurtDirection = (GlobalPosition - hitPosition).Normalized();
         // 判定是否死亡
         if (_isDead)
             _stateMachine.ChangeState("Die");
