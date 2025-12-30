@@ -115,13 +115,29 @@ public abstract partial class BaseCharacter : CharacterBody2D
     public void HandleHit(int damage)
     {
         if (_isDead) return;
+        // 添加受击闪烁动画
+        StartBlink();
+        // 减去伤害
         CurrentHealth -= damage;
+        // 判定是否死亡
         if (_isDead)
-        {
-        }
+            _stateMachine.ChangeState("Die");
         else
-        {
             _stateMachine.ChangeState("Hurt");
-        }
+    }
+
+    /// <summary>
+    /// 处理闪烁
+    /// </summary>
+    /// <param name="mixWeight">混合权重</param>
+    public void HandleBlink(float mixWeight)
+    {
+        AnimatedSprite2D.SetInstanceShaderParameter("Blink", mixWeight);
+    }
+
+    public void StartBlink()
+    {
+        Tween blinkTween = GetTree().CreateTween();
+        blinkTween.TweenMethod(Callable.From<float>(HandleBlink), 1.0, 0.0, 0.3);
     }
 }
