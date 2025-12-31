@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://ceg47bpfol78g"]
+[gd_scene load_steps=20 format=4 uid="uid://ceg47bpfol78g"]
 
 [ext_resource type="Texture2D" uid="uid://5h7aiwkmrmsr" path="res://Asset/Level/Background_Grass.png" id="1_xb63x"]
 [ext_resource type="PackedScene" uid="uid://dtn4iers0u62x" path="res://Game/Scene/player.tscn" id="2_f5lw1"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b8f00eaejnxor" path="res://Game/Scene/grass.tscn" id="6_o0bm1"]
 [ext_resource type="PackedScene" uid="uid://dj2tea60maj5d" path="res://Game/Scene/enemy.tscn" id="7_sbhkq"]
 [ext_resource type="PackedScene" uid="uid://ch7311h3mlwg1" path="res://Game/Scene/tree.tscn" id="8_wi015"]
+[ext_resource type="PackedScene" uid="uid://botthoami02j7" path="res://Game/Scene/game_ui.tscn" id="9_bktqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f5lw1"]
 texture = ExtResource("1_xb63x")
@@ -678,3 +679,5 @@ shape = SubResource("RectangleShape2D_bktqc")
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(542.5, 751)
 shape = SubResource("RectangleShape2D_jclpe")
+
+[node name="CanvasLayer_GameUI" parent="." instance=ExtResource("9_bktqc")]

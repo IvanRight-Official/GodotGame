@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=3 uid="uid://botthoami02j7"]
+
+[ext_resource type="Theme" uid="uid://4eojq8ujh18b" path="res://Game/Scene/UI_Theme/game_ui_theme.tres" id="1_d2evx"]
+
+[node name="CanvasLayer_GameUI" type="CanvasLayer"]
+
+[node name="Control_HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Control_HUD"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 450.0
+offset_bottom = 90.0
+theme = ExtResource("1_d2evx")
+
+[node name="Control_GameOver" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control_GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_GameOver" type="Label" parent="Control_GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -41.5
+offset_right = 120.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_d2evx")
+text = "游戏结束"
+
+[node name="Button_Restart" type="Button" parent="Control_GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 92.0
+offset_right = 100.0
+offset_bottom = 142.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_d2evx")
+text = "重新开始"
