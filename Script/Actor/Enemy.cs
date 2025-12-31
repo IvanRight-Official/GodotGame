@@ -33,7 +33,7 @@ public partial class Enemy : BaseCharacter
         AttackDamage = 10;
         // 拿到节点数 -> 拿到根节点 -> 根据节点Path 拿到玩家节点
         _player = GetTree().Root.GetNode<Player>("SceneRoot/Level/Player");
-        _hitBox = GetNode<Area2D>("Area2D_Hitbox");
+        _hitBox = GetNode<Area2D>("Area2D_Hurt_Hitbox");
         _hitBox.AreaEntered += OnAreaEntered;
     }
 
@@ -138,5 +138,14 @@ public partial class Enemy : BaseCharacter
     {
         Node parent = area.GetParent();
         if (parent == _player) _player.HandleHit(AttackDamage, GlobalPosition);
+    }
+
+    public override void DisabledHitbox()
+    {
+        base.DisabledHitbox();
+        _hitBox.SetDeferred(Area2D.PropertyName.Monitorable, false);
+        _hitBox.SetDeferred(Area2D.PropertyName.Monitoring, false);
+        // _hitBox.Monitorable = false;
+        // _hitBox.Monitoring = false;
     }
 }

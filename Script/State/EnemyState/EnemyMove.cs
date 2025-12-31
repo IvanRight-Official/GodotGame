@@ -65,6 +65,9 @@ public partial class EnemyMove : EnemyState
     {
         base.UpdatePhysics(delta);
 
+        // 如果玩家已经死亡，则不再行动
+        if (Enemy.Player.IsDead) return;
+
         // Do not query when the map has never synchronized and is empty.
         if (NavigationServer2D.MapGetIterationId(_navigationAgent2D.GetNavigationMap()) ==
             0) return;
@@ -151,6 +154,8 @@ public partial class EnemyMove : EnemyState
     /// <param name="safeVelocity"></param>
     public void OnVelocityComputed(Vector2 safeVelocity)
     {
+        // 如果玩家已经死亡，则不再行动
+        if (Enemy.Player.IsDead) return;
         // 只有在当前移动状态才处理回调
         if (StateMachine.CurrentState != this) return;
 

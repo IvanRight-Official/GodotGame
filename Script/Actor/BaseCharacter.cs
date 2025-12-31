@@ -44,7 +44,11 @@ public abstract partial class BaseCharacter : CharacterBody2D
         set
         {
             _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
-            if (_currentHealth == 0) _isDead = true;
+            if (_currentHealth == 0)
+            {
+                _isDead = true;
+                DisabledHitbox();
+            }
         }
     }
 
@@ -175,5 +179,12 @@ public abstract partial class BaseCharacter : CharacterBody2D
     {
         Tween blinkTween = GetTree().CreateTween();
         blinkTween.TweenMethod(Callable.From<float>(HandleBlink), 1.0, 0.0, 0.3);
+    }
+
+    /// <summary>
+    /// 当角色死亡时，关闭碰撞体
+    /// </summary>
+    public virtual void DisabledHitbox()
+    {
     }
 }
