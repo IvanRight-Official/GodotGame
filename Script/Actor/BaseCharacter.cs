@@ -101,11 +101,35 @@ public abstract partial class BaseCharacter : CharacterBody2D
     /// <returns>返回当前或上一次的方向</returns>
     protected virtual string GetDirection()
     {
-        if (_inputDirection == Vector2.Zero) return _animationDirection;
-        _animationDirection = _inputDirection.X > 0 ? nameof(DirectionEnum.Right) :
-            _inputDirection.X < 0 ? nameof(DirectionEnum.Left) :
-            _inputDirection.Y > 0 ? nameof(DirectionEnum.Down) : nameof(DirectionEnum.Up);
+        if (_inputDirection != Vector2.Zero)
+            _animationDirection = GetMoveDirection(_inputDirection);
+        else if (HurtDirection != Vector2.Zero)
+            // 受伤强制变更方向动画，需要优化一下
+            _animationDirection = GetHurtDirection(-HurtDirection);
+
         return _animationDirection;
+    }
+
+    public string GetHurtDirection(Vector2 direction)
+    {
+        float angle = direction.Angle(); // 返回弧度
+        angle = Mathf.RadToDeg(angle); // 转换为角度
+
+        // 将角度标准化到 [-180, 180]
+        if (angle > 45 && angle <= 135)
+            return nameof(DirectionEnum.Down);
+        if (angle > 135 || angle <= -135)
+            return nameof(DirectionEnum.Left);
+        if (angle > -135 && angle <= -45)
+            return nameof(DirectionEnum.Up);
+        return nameof(DirectionEnum.Right);
+    }
+
+    private string GetMoveDirection(Vector2 direction)
+    {
+        return direction.X > 0 ? nameof(DirectionEnum.Right) :
+            direction.X < 0 ? nameof(DirectionEnum.Left) :
+            direction.Y > 0 ? nameof(DirectionEnum.Down) : nameof(DirectionEnum.Up);
     }
 
     /// <summary>

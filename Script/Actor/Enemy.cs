@@ -21,13 +21,22 @@ public partial class Enemy : BaseCharacter
     /// </summary>
     private float _playerAngle;
 
+    /// <summary>
+    /// 攻击体/受击体
+    /// </summary>
+    private Area2D _hitBox;
+
     public override void _Ready()
     {
         base._Ready();
         DebugModel();
+        AttackDamage = 10;
         // 拿到节点数 -> 拿到根节点 -> 根据节点Path 拿到玩家节点
         _player = GetTree().Root.GetNode<Player>("SceneRoot/Level/Player");
+        _hitBox = GetNode<Area2D>("Area2D_Hitbox");
+        _hitBox.AreaEntered += OnAreaEntered;
     }
+
 
     /// <summary>
     /// 是否开启 debug 模式
@@ -120,4 +129,14 @@ public partial class Enemy : BaseCharacter
     //     // 添加玩家位置作为终点
     //     _targetLine.AddPoint(_player.GlobalPosition);
     // }
+
+    /// <summary>
+    /// 碰撞检测处理
+    /// </summary>
+    /// <param name="area">玩家</param>
+    private void OnAreaEntered(Area2D area)
+    {
+        Node parent = area.GetParent();
+        if (parent == _player) _player.HandleHit(AttackDamage, GlobalPosition);
+    }
 }
