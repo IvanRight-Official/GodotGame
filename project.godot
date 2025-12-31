@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 run/canvas_textures/default_texture_filter=0
 
+[autoload]
+
+GameManager="*res://Script/GameManager.cs"
+
 [display]
 
 window/size/viewport_width=1920

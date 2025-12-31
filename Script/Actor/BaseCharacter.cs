@@ -41,15 +41,7 @@ public abstract partial class BaseCharacter : CharacterBody2D
     public int CurrentHealth
     {
         get => _currentHealth;
-        set
-        {
-            _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
-            if (_currentHealth == 0)
-            {
-                _isDead = true;
-                DisabledHitbox();
-            }
-        }
+        set => setHealth(value);
     }
 
     /// <summary>
@@ -202,5 +194,15 @@ public abstract partial class BaseCharacter : CharacterBody2D
     {
         Invincible = status;
         AnimatedSprite2D.SetInstanceShaderParameter("Invincible", status);
+    }
+
+    public virtual void setHealth(int health)
+    {
+        _currentHealth = Mathf.Clamp(health, 0, MaxHealth);
+        if (_currentHealth == 0)
+        {
+            _isDead = true;
+            DisabledHitbox();
+        }
     }
 }

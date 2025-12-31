@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://botthoami02j7"]
+[gd_scene load_steps=3 format=3 uid="uid://botthoami02j7"]
 
+[ext_resource type="Script" uid="uid://bwdd4x1khd8lh" path="res://Script/GameUIManager.cs" id="1_17s7d"]
 [ext_resource type="Theme" uid="uid://4eojq8ujh18b" path="res://Game/Scene/UI_Theme/game_ui_theme.tres" id="1_d2evx"]
 
 [node name="CanvasLayer_GameUI" type="CanvasLayer"]
+script = ExtResource("1_17s7d")
 
 [node name="Control_HUD" type="Control" parent="."]
 layout_mode = 3

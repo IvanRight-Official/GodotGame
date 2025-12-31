@@ -32,4 +32,10 @@ public partial class Player : BaseCharacter
         // 执行基于 Velocity 的移动和碰撞检测
         MoveAndSlide();
     }*/
+
+    public override void setHealth(int health)
+    {
+        base.setHealth(health);
+        GameManager.Instance.SetHealth(CurrentHealth, MaxHealth);
+    }
 }
