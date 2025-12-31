@@ -1,13 +1,35 @@
+using System;
+
 using Godot;
 
 namespace FirstGodotGame.Script.State.PlayerState;
 
 public partial class PlayerHurt : PlayerState
 {
-    public override void Enter()
+    public override async void Enter()
     {
-        base.Enter();
-        Player.UpdateAnimation();
+        try
+        {
+            base.Enter();
+            Player.UpdateAnimation();
+
+            // 处理无敌状态
+            Player.HandleInvincible(true);
+            // 无敌两秒
+            await ToSignal(GetTree().CreateTimer(2), Timer.SignalName.Timeout);
+            // 恢复
+            Player.HandleInvincible(false);
+
+            // 存在重复绑定
+            // GetTree().CreateTimer(2).Timeout += () =>
+            // {
+            //     Player.HandleInvincible(false);
+            // };
+        }
+        catch (Exception e)
+        {
+            GD.PrintErr(e);
+        }
     }
 
     public override void Update()

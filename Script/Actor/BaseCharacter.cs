@@ -88,6 +88,12 @@ public abstract partial class BaseCharacter : CharacterBody2D
     /// </summary>
     public Vector2 HurtDirection { get; set; }
 
+
+    /// <summary>
+    /// 无敌状态
+    /// </summary>
+    public bool Invincible { get; set; } = false;
+
     public override void _Ready()
     {
         // https://docs.godotengine.org/zh-cn/4.4/tutorials/scripting/c_sharp/c_sharp_differences.html#onready-annotation
@@ -152,7 +158,7 @@ public abstract partial class BaseCharacter : CharacterBody2D
     ///
     public void HandleHit(int damage, Vector2 hitPosition = default)
     {
-        if (_isDead) return;
+        if (_isDead || Invincible) return;
         // 添加受击闪烁动画
         StartBlink();
         // 减去伤害
@@ -186,5 +192,15 @@ public abstract partial class BaseCharacter : CharacterBody2D
     /// </summary>
     public virtual void DisabledHitbox()
     {
+    }
+
+    /// <summary>
+    /// 处理无敌状态
+    /// </summary>
+    /// <param name="status">状态</param>
+    public void HandleInvincible(bool status)
+    {
+        Invincible = status;
+        AnimatedSprite2D.SetInstanceShaderParameter("Invincible", status);
     }
 }
