@@ -24,6 +24,13 @@ public partial class GameUIManager : CanvasLayer
         GameManager.Instance.GameOver += OnGameOver;
     }
 
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        GameManager.Instance.UpdateHealth -= OnUpdateHealth;
+        GameManager.Instance.GameOver -= OnGameOver;
+    }
+
     private void OnGameRestart()
     {
         GetTree().ReloadCurrentScene();

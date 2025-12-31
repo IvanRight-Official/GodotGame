@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://ceg47bpfol78g"]
+[gd_scene load_steps=21 format=4 uid="uid://ceg47bpfol78g"]
 
 [ext_resource type="Texture2D" uid="uid://5h7aiwkmrmsr" path="res://Asset/Level/Background_Grass.png" id="1_xb63x"]
 [ext_resource type="PackedScene" uid="uid://dtn4iers0u62x" path="res://Game/Scene/player.tscn" id="2_f5lw1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbf6hfj00436y" path="res://Asset/Level/TreeAndGrass.png" id="4_b0md6"]
 [ext_resource type="Script" uid="uid://u0jmrj8lqh1c" path="res://Script/GrassGeneratorTileMapLayer.cs" id="5_aq0ho"]
 [ext_resource type="PackedScene" uid="uid://b8f00eaejnxor" path="res://Game/Scene/grass.tscn" id="6_o0bm1"]
+[ext_resource type="Script" uid="uid://dymowphupx5kp" path="res://Script/EnemyManager.cs" id="7_jclpe"]
 [ext_resource type="PackedScene" uid="uid://dj2tea60maj5d" path="res://Game/Scene/enemy.tscn" id="7_sbhkq"]
 [ext_resource type="PackedScene" uid="uid://ch7311h3mlwg1" path="res://Game/Scene/tree.tscn" id="8_wi015"]
 [ext_resource type="PackedScene" uid="uid://botthoami02j7" path="res://Game/Scene/game_ui.tscn" id="9_bktqc"]
@@ -573,6 +574,7 @@ navigation_polygon = SubResource("NavigationPolygon_sbhkq")
 
 [node name="EnemyGroup" type="Node2D" parent="Level"]
 y_sort_enabled = true
+script = ExtResource("7_jclpe")
 
 [node name="Enemy" parent="Level/EnemyGroup" instance=ExtResource("7_sbhkq")]
 position = Vector2(252, 810)
