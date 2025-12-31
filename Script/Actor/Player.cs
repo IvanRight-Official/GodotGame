@@ -36,6 +36,8 @@ public partial class Player : BaseCharacter
     public override void setHealth(int health)
     {
         base.setHealth(health);
-        GameManager.Instance.SetHealth(CurrentHealth, MaxHealth);
+        GameManager.Instance.HandleUpdateHealth(CurrentHealth, MaxHealth);
+        if (CurrentHealth == 0)
+            GameManager.Instance.HandleGameOver();
     }
 }

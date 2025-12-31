@@ -9,6 +9,9 @@ public partial class GameManager : Node
     [Signal]
     public delegate void UpdateHealthEventHandler(int currentHealth, int maxHealth);
 
+    [Signal]
+    public delegate void GameOverEventHandler();
+
     public readonly string SignalUpdateHealth = "UpdateHealth";
 
     // Called when the node enters the scene tree for the first time.
@@ -17,8 +20,13 @@ public partial class GameManager : Node
         Instance = this;
     }
 
-    public void SetHealth(int currentHealth, int maxHealth)
+    public void HandleUpdateHealth(int currentHealth, int maxHealth)
     {
         EmitSignal(SignalName.UpdateHealth, currentHealth, maxHealth);
+    }
+
+    public void HandleGameOver()
+    {
+        EmitSignal(SignalName.GameOver);
     }
 }
