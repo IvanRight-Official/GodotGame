@@ -885,7 +885,7 @@ color = Color(1, 1, 1, 0.23529412)
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 20.0
 avoidance_enabled = true
-max_speed = 20.0
+max_speed = 200.0
 
 [node name="Timer_UpdatePlayerPosition" type="Timer" parent="."]
 wait_time = 0.5

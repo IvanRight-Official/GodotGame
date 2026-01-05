@@ -10,7 +10,7 @@ public partial class EnemyMove : EnemyState
     /// 移动速度，单位为 像素/秒
     /// </summary>
     [Export]
-    public int Speed { get; set; } = 50;
+    public float Speed { get; set; } = 100f;
 
     /// <summary>
     /// 加速度
